@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MailTemplateResponse {
+public class TemplateMailResponse {
     private String name;
     private String template;
     private Timestamp createdAt;

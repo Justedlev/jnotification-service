@@ -9,13 +9,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Collections;
 import java.util.Map;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SendMailTemplateRequest {
+public class SendTemplateMailRequest implements Serializable {
     @NotNull
     @NotEmpty
     @Email
@@ -28,5 +30,6 @@ public class SendMailTemplateRequest {
     @NotEmpty
     @NotBlank
     private String subject;
-    private Map<String, String> content;
+    @Builder.Default
+    private Map<String, String> content = Collections.emptyMap();
 }

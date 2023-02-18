@@ -1,21 +1,22 @@
 package com.justedlev.notification.queue.impl;
 
-import com.justedlev.notification.model.request.SendMailTemplateRequest;
+import com.justedlev.notification.model.request.SendTemplateMailRequest;
+import com.justedlev.notification.properties.CloudAmqpProperties;
 import com.justedlev.notification.queue.JNotificationQueue;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JNotificationQueueImpl implements JNotificationQueue {
     private final AmqpTemplate amqpTemplate;
-    @Value("${cloudamqp.queues.send-template-mail}")
-    private String mailQueue;
+    private final CloudAmqpProperties.Queues properties;
 
     @Override
-    public void sendEmail(SendMailTemplateRequest request) {
-        amqpTemplate.convertAndSend(mailQueue, request);
+    public void sendEmail(SendTemplateMailRequest request) {
+        amqpTemplate.convertAndSend(properties.getSendTemplateMail(), request);
     }
 }

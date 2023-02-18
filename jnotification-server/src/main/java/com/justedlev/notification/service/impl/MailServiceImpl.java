@@ -1,10 +1,10 @@
 package com.justedlev.notification.service.impl;
 
 import com.justedlev.notification.component.MailTemplateComponent;
-import com.justedlev.notification.model.request.CreateMailTemplateRequest;
-import com.justedlev.notification.model.request.SendMailTemplateRequest;
-import com.justedlev.notification.model.response.MailTemplateResponse;
-import com.justedlev.notification.model.response.SendMailTemplateResponse;
+import com.justedlev.notification.model.request.CreateTemplateMailRequest;
+import com.justedlev.notification.model.request.SendTemplateMailRequest;
+import com.justedlev.notification.model.response.SendTemplateMailResponse;
+import com.justedlev.notification.model.response.TemplateMailResponse;
 import com.justedlev.notification.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ public class MailServiceImpl implements MailService {
     private final MailTemplateComponent mailTemplateComponent;
 
     @Override
-    public SendMailTemplateResponse sendFromTemplate(SendMailTemplateRequest request) {
+    public SendTemplateMailResponse sendFromTemplate(SendTemplateMailRequest request) {
         return mailTemplateComponent.send(request);
     }
 
     @Override
-    public MailTemplateResponse createTemplate(CreateMailTemplateRequest request) {
+    public TemplateMailResponse createTemplate(CreateTemplateMailRequest request) {
         return mailTemplateComponent.create(request);
     }
 }

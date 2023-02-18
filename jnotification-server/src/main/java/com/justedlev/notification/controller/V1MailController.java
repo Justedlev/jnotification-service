@@ -1,7 +1,7 @@
 package com.justedlev.notification.controller;
 
-import com.justedlev.notification.model.request.CreateMailTemplateRequest;
-import com.justedlev.notification.model.response.MailTemplateResponse;
+import com.justedlev.notification.model.request.CreateTemplateMailRequest;
+import com.justedlev.notification.model.response.TemplateMailResponse;
 import com.justedlev.notification.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class V1MailController {
 
     @PostMapping(value = "/create-template")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<MailTemplateResponse> createTemplate(@Valid @RequestBody CreateMailTemplateRequest request) {
+    public ResponseEntity<TemplateMailResponse> createTemplate(@Valid @RequestBody CreateTemplateMailRequest request) {
         return ResponseEntity.ok(mailService.createTemplate(request));
     }
 }

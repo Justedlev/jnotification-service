@@ -1,12 +1,12 @@
 package com.justedlev.notification.component;
 
-import com.justedlev.notification.model.request.CreateMailTemplateRequest;
-import com.justedlev.notification.model.request.SendMailTemplateRequest;
-import com.justedlev.notification.model.response.MailTemplateResponse;
-import com.justedlev.notification.model.response.SendMailTemplateResponse;
+import com.justedlev.notification.model.request.CreateTemplateMailRequest;
+import com.justedlev.notification.model.request.SendTemplateMailRequest;
+import com.justedlev.notification.model.response.SendTemplateMailResponse;
+import com.justedlev.notification.model.response.TemplateMailResponse;
 
 public interface MailTemplateComponent {
-    MailTemplateResponse create(CreateMailTemplateRequest request);
+    TemplateMailResponse create(CreateTemplateMailRequest request);
 
-    SendMailTemplateResponse send(SendMailTemplateRequest request);
+    SendTemplateMailResponse send(SendTemplateMailRequest request);
 }

@@ -3,10 +3,10 @@ package com.justedlev.notification.component.impl;
 import com.justedlev.notification.component.MailSenderComponent;
 import com.justedlev.notification.component.MailTemplateComponent;
 import com.justedlev.notification.component.command.SendMailCommand;
-import com.justedlev.notification.model.request.CreateMailTemplateRequest;
-import com.justedlev.notification.model.request.SendMailTemplateRequest;
-import com.justedlev.notification.model.response.MailTemplateResponse;
-import com.justedlev.notification.model.response.SendMailTemplateResponse;
+import com.justedlev.notification.model.request.CreateTemplateMailRequest;
+import com.justedlev.notification.model.request.SendTemplateMailRequest;
+import com.justedlev.notification.model.response.SendTemplateMailResponse;
+import com.justedlev.notification.model.response.TemplateMailResponse;
 import com.justedlev.notification.repository.MailTemplateRepository;
 import com.justedlev.notification.repository.entity.MailTemplate;
 import lombok.RequiredArgsConstructor;
@@ -25,20 +25,20 @@ public class MailTemplateComponentImpl implements MailTemplateComponent {
     private final ModelMapper defaultMapper;
 
     @Override
-    public MailTemplateResponse create(CreateMailTemplateRequest request) {
+    public TemplateMailResponse create(CreateTemplateMailRequest request) {
         return mailTemplateRepository.findByName(request.getName())
-                .map(current -> defaultMapper.map(current, MailTemplateResponse.class))
+                .map(current -> defaultMapper.map(current, TemplateMailResponse.class))
                 .orElse(createTemplate(request));
     }
 
-    private MailTemplateResponse createTemplate(CreateMailTemplateRequest request) {
+    private TemplateMailResponse createTemplate(CreateTemplateMailRequest request) {
         var entity = defaultMapper.map(request, MailTemplate.class);
 
-        return defaultMapper.map(mailTemplateRepository.save(entity), MailTemplateResponse.class);
+        return defaultMapper.map(mailTemplateRepository.save(entity), TemplateMailResponse.class);
     }
 
     @Override
-    public SendMailTemplateResponse send(SendMailTemplateRequest request) {
+    public SendTemplateMailResponse send(SendTemplateMailRequest request) {
         var mailTemplate = mailTemplateRepository.findByName(request.getTemplateName())
                 .orElseThrow(() -> new EntityNotFoundException(
                         String.format("Template %s not exists", request.getTemplateName())));
@@ -49,7 +49,7 @@ public class MailTemplateComponentImpl implements MailTemplateComponent {
                 .build();
         mailSenderComponent.send(sendMailCommand);
 
-        return SendMailTemplateResponse.builder()
+        return SendTemplateMailResponse.builder()
                 .recipient(request.getRecipient())
                 .templateName(request.getTemplateName())
                 .build();

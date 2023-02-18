@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateMailTemplateRequest {
+public class CreateTemplateMailRequest {
     @NotNull
     @NotEmpty
     private String name;
